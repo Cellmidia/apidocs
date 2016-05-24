@@ -1,0 +1,436 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Cellmidia API - Documentação de referência</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;http&quot;,&quot;php&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="http">http</a>
+              <a href="#" data-language-name="php">php</a>
+        </div>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Cellmidia Developers Team</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="vis-o-geral">Visão Geral</h1>
+
+<p>Bem vindo a documentaçao da Cellmidia API! Esta é a API utilizada por nossa interface Web.</p>
+
+<p>Nossas APIs são baseadas em métodos HTTP, o que torna fácil escrever aplicações e integrar nossos serviços. Você poderá
+usar qualquer cliente HTTP em qualquer linguagem de programação ou até mesmo no seu navegador para interagir com a nossa
+API.</p>
+
+<h1 id="enviando-requisi-es">Enviando requisições</h1>
+
+<p>Quando você for escrever seu próprio cliente para nossa API, por favor tenha em mente o seguinte:</p>
+
+<ul>
+<li>Sempre defina o cabeçalho <strong>User-Agent</strong>. Este cabeçalho não é obrigatório por agora, mas ele será no futuro próximo.
+Por exemplo seu cliente de API é chamado de &ldquo;MyClient&rdquo;, e a versão atual dele seja 1.0.0, seria boa prática usar isso
+como valor para este cabeçalho <code class="prettyprint">MyClient/1.0.0</code></li>
+<li>Sempre defina o cabeçalho <strong>Accept</strong> para <code class="prettyprint">application/json</code></li>
+</ul>
+
+<aside class="notice">
+    Se você não definir o cabeçalho <b>Content-Type</b> e <b>Accept</b> você estará automaticamente recuperando nosso formato JSON.
+</aside>
+
+<p>Qualquer biblioteca existente deve dar conta disso para você.</p>
+
+<h2 id="api-endpoint">API Endpoint</h2>
+
+<p>A API endpoint da Cellmidia API é: <code class="prettyprint">http://api.smsapp.com.br</code></p>
+
+<p>NOTA: Nessa fase as chamadas de API podem serem feitas sem uso do HTTPS, mas na próxima
+atualização o uso de SSL será obrigatória.</p>
+
+<h2 id="encoding">Encoding</h2>
+
+<p>Nossa API usa o <em>character encoding</em> em <strong>UTF-8</strong>. As requisições podem incluir um
+<strong>Content-Type</strong> como <code class="prettyprint">application/json; charset=utf-8</code></p>
+
+<h2 id="padr-es-de-data-e-hora">Padrões de Data e Hora</h2>
+
+<p>Todos os timestamps estão formatados de acordo com a <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO-8601</a>.</p>
+
+<h2 id="content-type">Content-Type</h2>
+
+<p>Nossa API só aceita entradas do tipo <code class="prettyprint">application/json</code>. Todas as solitações <code class="prettyprint">POST</code> os argumentos devem ser passados
+como json explicitanto o  <code class="prettyprint">Content-Type</code> definido como <code class="prettyprint">application/json</code>.</p>
+
+<p>Todas requisições <code class="prettyprint">GET</code> e <code class="prettyprint">DELETE</code> devem ter seus argumentos passados como <code class="prettyprint">QUERY STRING</code></p>
+
+<h2 id="api-request">API Request</h2>
+
+<p>A Cellmidia API expõe uma lista de serviços REST que permitem realizar as mais variadas tarefas tais como, enviar SMS,
+cadastrar um conta, entre outras.</p>
+
+<p>Todas as requisições devem apontar no seguinte endpoit: <code class="prettyprint">http://api.smsapp.com.br/v1</code></p>
+
+<h2 id="api-response">API Response</h2>
+
+<p>A maioria dos pedidos de requisição retornam um resposta em formato <strong>JSON</strong> e um <strong>HTTP STATUS</strong>.</p>
+
+<p>Uma lista de retornos HTTP e seus respectivos códigos podem ser exploradas <a href="#http-status-code">nesta seção</a>.</p>
+
+          <h1 id="autoriza-o-e-autentica-o">Autorização e Autenticação</h1>
+
+<h2 id="vis-o-geral">Visão Geral</h2>
+
+<p>Nossa API faz uso do padrão JWT ou <a href="https://tools.ietf.org/html/rfc7519">JSON Web Tokens</a>.</p>
+
+<p>Recursos de autorização é a representação de uma autorização concedida ao usuário para realizar qualquer ação.</p>
+
+<p><strong>Somente</strong> você pode conceder estas autorizações através de um token.</p>
+
+<p>Esta API permite você autenticar seus usários do seu Cliente enviando solicitações de login para sua própria API.</p>
+
+<h2 id="auth-endpoint">Auth Endpoint</h2>
+
+<p>O endpoint para autenticação e authorização é: <code class="prettyprint">http://id.cellmidia.com.br</code></p>
+
+<h1 id="autentica-o">Autenticação</h1>
+
+<h2 id="autoriza-es">Autorizações</h2>
+
+<p>Existem duas formas de realizar autorização:</p>
+
+<ul>
+<li>Credenciais</li>
+<li>Token</li>
+</ul>
+
+<p>Ambas estratégias devem ser feitas no seguinte endpoint:</p>
+
+<p><code class="prettyprint">POST /authentication</code></p>
+
+<h3 id="autoriza-o-usando-credenciais">Autorização usando credenciais</h3>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/authentication</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">Http/2.2</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">id.cellmidia.com.br</span>
+
+{
+    "username": "youraccount@cellmidia.com.br",
+    "password": "YourGreatPassword",
+    "type": "credentials"
+}
+</code></pre>
+
+<blockquote>
+<p>A solicitação acima retorna a seguinte resposta:</p>
+</blockquote>
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nt">"access_token"</span><span class="p">:</span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI1NmZlOGI3ZjVhNDgxIiwiaXNzIjoiYXBpLmNlbGxtaWRpYS5kZXYiLCJhdWQiOiJodHRwOlwvXC9pZC5jZWxsbWlkaWEuZGV2XC8iLCJ1c2VyIjp7InVzZXJuYW1lIjoiZG9taW5nb3NAY2VsbG1pZGlhLmNvbS5iciJ9LCJleHAiOjE0NTk1MjYwMzF9.lCMFHlPvkTP3DHmpthQQNYXNk8QECPePL2wJW5Mt1IY"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"renew_token"</span><span class="p">:</span><span class="s2">"e7032dd7c38240bbdc4a79452aa07192784be680"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Se as credenciais estiverem incorretas  o retorno será o seguinte:</p>
+</blockquote>
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nt">"error"</span><span class="p">:</span><span class="s2">"Invalid credentials."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"code"</span><span class="p">:</span><span class="mi">401</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>O Recurso de autorização é composto pelos seguintes atributos:</p>
+
+<table><thead>
+<tr>
+<th>Atributo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>+ access_token</td>
+<td>Representa um JWT</td>
+</tr>
+<tr>
+<td>+ renew_token</td>
+<td>Representa sua chave de validação do access_token</td>
+</tr>
+</tbody></table>
+
+<p><strong>PARÂMETROS DO PAYLOAD</strong></p>
+
+<table><thead>
+<tr>
+<th>Argumento</th>
+<th>Obrigatório</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>Sim</td>
+<td>Seu usuário sempre no formato `usuario@dominio.com; ≤1023 bytes</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Sim</td>
+<td>Sua senha; ≤1023 bytes</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Sim</td>
+<td><code class="prettyprint">credentials</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="autoriza-o-usando-o-token-de-renova-o">Autorização usando o Token de Renovação</h3>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/authentication</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI1NmZlOGI3ZjVhNDgxIiwiaXNzIjoiYXBpLmNlbGxtaWRpYS5kZXYiLCJhdWQiOiJodHRwOlwvXC9pZC5jZWxsbWlkaWEuZGV2XC8iLCJ1c2VyIjp7InVzZXJuYW1lIjoiZG9taW5nb3NAY2VsbG1pZGlhLmNvbS5iciJ9LCJleHAiOjE0NTk1MjYwMzF9.lCMFHlPvkTP3DHmpthQQNYXNk8QECPePL2wJW5Mt1IY</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">Http/2.2</span>
+<span class="s">Host id.cellmidia.com.br</span>
+
+{
+    "type": "token"
+}
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nt">"access_token"</span><span class="p">:</span><span class="s2">"eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzYjphdXRoOnN0YWdpbmciLCJqdGkiOiI1NTY0ZDhlYTU5MDYyIiwidXNlciI6eyJpZCI6MiwidXNlcm5hbWUiOiJhZG1pbkBzb2NpYWxiYXNlLmxvY2FsIiwiZW1haWwiOiJhZG1pbkBzb2NpYWxiYXNlLmNvbS5iciIsIm5hbWUiOiJBZG1pbiJ9LCJuZXR3b3JrIjp7ImlkIjoxLCJuYW1lIjoiU29jaWFsQmFzZSBWMyIsInJlc291cmNlIjoiZGV2LXNvY2lhbGJhc2UiLCJhcG4iOiJodHRwOlwvXC9sb2NhbGhvc3Q6OTAwNSJ9LCJleHAiOjE0MzI2NzYwOTB9.9ijI-XZ8GfHE69NFcMUs_kHtR2pv0jel5U3Yha0OK-M"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"renew_token"</span><span class="p">:</span><span class="s2">"e7032dd7c38240bbdc4a79452aa07192784be680"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>As vezes será necessário renovar o token (Long term session).</p>
+
+<p><strong>PARÂMETROS DO PAYLOAD</strong></p>
+
+<table><thead>
+<tr>
+<th>Argumento</th>
+<th>Obrigatório</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>Sim</td>
+<td><code class="prettyprint">renew_token</code> obtido na solicitação usando credenciais.</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Response</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Atributo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>+ access_token</td>
+<td>Um novo Token JWT</td>
+</tr>
+<tr>
+<td>+ renew_token</td>
+<td>a mesma usada na solicitação</td>
+</tr>
+</tbody></table>
+
+          <h1 id="http-status-code">HTTP Status Code</h1>
+
+<p>A Cellmidia API em qualquer solicitação os seguites HTTP Status podem ser retornados:</p>
+
+<table><thead>
+<tr>
+<th>Código</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Ok &ndash; Sua requisição foi bem sucedida</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created &ndash; Um novo item foi criado.</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Accepted &ndash; O item corrente foi atualizado.</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content &ndash; O item foi apagado.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Seu pedido foi mal feito, falta de parâmetro(s) ou parâmetro(s) inválido.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized - Sua API Key contém erro ou autenticação incorreta.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash;  O recurso solicitdo é restrito a administradores somente.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; O Recurso pedido não foi encontrado.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>HTTP method not allowed &ndash; Esse recurso não pode ser acessado desta maneira.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable &ndash; Seu pedido está em um formato não reconhecido.</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict &ndash; Pedido conflitante.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; O recurso solicitado foi removido dos nossos servidores.</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&rsquo;m a teapot</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many requests &ndash; Vai com calma! Você está fazendo muitos pedidos ao mesmo tempo.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server error &ndash; Desculpe-nos mas estamos com problemas em nossos servidores. Tente mais tarde.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; Estamos temporariamente offline para manutenções. Por favor tente mais tarde.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="http">http</a>
+                <a href="#" data-language-name="php">php</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
